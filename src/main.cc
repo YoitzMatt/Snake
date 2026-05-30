@@ -1,5 +1,6 @@
 #include <cctype>
 #include <iostream>
+#include <memory>
 #include "game.hpp"
 
 void showRules() 
@@ -20,6 +21,11 @@ void showHelp()
     std::cout << "================================\n";
     std::cout << "Enter your choice: ";
 }
+
+// TODO:
+// 1.) handle game starting input 
+// 2.) create grid
+// 3.) handle game events
 
 auto main(void) -> int
 {
@@ -44,10 +50,10 @@ auto main(void) -> int
         continue;
     }
 
-    // Game logic
-    Snake::Grid ng;
-    ng.Init(10, 10);
+      // Game start
+      std::unique_ptr<Snake::Grid> grid{new Snake::Grid};
+      grid->Init(20, 100);
+      
   }
-  
   return 0;
 }
