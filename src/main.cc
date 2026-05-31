@@ -3,40 +3,21 @@
 #include <memory>
 #include "game.hpp"
 
-void showRules() 
-{
-    std::cout << "\n========== RULES ==========\n";
-    std::cout << "1. The goal of the game is to...\n";
-    std::cout << "2. Players take turns...\n";
-    std::cout << "3. The first player to... wins!\n";
-    std::cout << "============================\n\n";
-}
- 
-void showHelp() 
-{
-    std::cout << "\n========== HELP MENU ==========\n";
-    std::cout << "  Y - Continue to game\n";
-    std::cout << "  H - Show rules\n";
-    std::cout << "  Q - Quit\n";
-    std::cout << "================================\n";
-    std::cout << "Enter your choice: ";
-}
-
 // TODO:
-// 1.) handle game starting input 
-// 2.) create grid
-// 3.) handle game events
-
+// 1.) make snake appear on the screen 
+// 2.) make snake move
+// 3.) make snake respond to player input
 auto main(void) -> int
 {
   char input = {};
-  showHelp();
+  Snake::showHelp();
+
   while (true) {
     std::cin >> input;
     input = std::tolower(static_cast<unsigned char>(input)); 
       switch (input) {
       case 'h':
-        showRules();
+        Snake::showRules();
         continue;
       case 'y':
         std::cout << "starting game...." << std::endl;
@@ -46,14 +27,16 @@ auto main(void) -> int
         return 0;
       default:
         std::cout << "Invalid option chosen" << std::endl;
-        showHelp();
+        Snake::showHelp();
         continue;
     }
 
       // Game start
       std::unique_ptr<Snake::Grid> grid{new Snake::Grid};
-      grid->Init(20, 100);
-      
+      grid->Init(COL, ROW);
+
+      std::unique_ptr<Snake::Player> p{new Snake::Player};
+      int start_pos{(ROW - 1 / 2)};
   }
   return 0;
 }
