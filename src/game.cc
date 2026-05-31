@@ -43,44 +43,57 @@ Snake::Vec Snake::Vec::operator*(float speed) const
 {
     return Vec(x * speed, y * speed);
 }
+
+void Snake::Vec::Set(float x, float y)
+{
+  this->x = x;
+  this->y = y;
+}
+
 // Player methods
-void StartGame()
+void Snake::Player::StartGame()
 {
     char input{};
     bool done{false};
     while (!done) {
+        Snake::Vec movement{}; 
         std::cin >> input;
         std::tolower(static_cast<unsigned char>(input));
+
         switch (input) {
             case 'w':
                 // move up
-                Snake::Player::Move(&Snake::Vec(0, 1));
+                movement.Set(0.0, 1.0);
+                Move(movement);
                 break;
             case 'a':
-                // move left
-                Snake::Player::Move(&Snake::Vec(-1, 0));
+                movement.Set(-1.0, 0.0);
+                Move(movement);
                 break;
             case 's':
-                // move down
-                Snake::Player::Move(&Snake::Vec(0, -1));
+                movement.Set(0.0, -1.0);
+                Move(movement);
                 break;
             case 'd':
-                // move right
-                Snake::Player::Move(&Snake::Vec(1, 0));
+                movement.Set(1.0, 0.0);
+                Move(movement);
                 break;
             default:
-                // invalid press do nothing
                 // TODO: implement player moving in last direction they pressed
                 break;
         }
 
         // evaluate outcome after updating player position
+
     }
 }
 
 void Snake::Player::Move(Snake::Vec& movement)
 {
+    // update the position
     position = position + movement * speed;
+
+    // check if the player has hit the border an apple of another empty cell
 }
 
 

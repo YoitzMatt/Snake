@@ -36,7 +36,8 @@ auto main(void) -> int
       grid->Init(COL, ROW);
 
       std::unique_ptr<Snake::Player> p{new Snake::Player};
-      int start_pos{(ROW - 1 / 2)};
+      p->StartGame();
   }
+
   return 0;
 }

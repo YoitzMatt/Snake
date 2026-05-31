@@ -4,6 +4,7 @@
 
 const int ROW{100};
 const int COL{20};
+const int START_POS{(ROW - 1 / 2)};
 
 namespace Snake 
 {
@@ -24,6 +25,7 @@ namespace Snake
             float x;
             float y;
             Vec(float x = 0, float y = 0) : x(x), y(y) {}
+            void Set(float x, float y); 
             Vec operator+(const Vec& other) const;
             Vec operator*(float speed) const;
     };
@@ -31,16 +33,14 @@ namespace Snake
     class Player {
       public:
         void StartGame();
+        void Move(Snake::Vec& movement);
         Snake::Vec position;
-       void Move(Snake::Vec& movement);
 
         private:
             std::vector<int> snake;
             std::unique_ptr<Snake::Grid> grid;
-
             float speed;
     };
-
 
     void showRules();
     void showHelp(); 
